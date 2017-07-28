@@ -1,0 +1,61 @@
+标签选择器
+
+在快速使用中我们添加如下代码：
+print(soup.title)
+print(type(soup.title))
+print(soup.head)
+print(soup.p)
+
+通过这种soup.标签名 我们就可以获得这个标签的内容
+这里有个问题需要注意，通过这种方式获取标签，如果文档中有多个这样的标签，返回的结果是第一个标签的内容，
+如上面我们通过soup.p获取p标签，而文档中有多个p标签，但是只返回了第一个p标签内容
+
+获取名称
+
+当我们通过soup.title.name的时候就可以获得该title标签的名称，即title
+
+获取属性
+
+print(soup.p.attrs['name'])
+print(soup.p['name'])
+上面两种方式都可以获取p标签的name属性值
+
+获取内容
+
+print(soup.p.string)
+结果就可以获取第一个p标签的内容：
+The Dormouse's story
+
+嵌套选择
+
+我们直接可以通过下面嵌套的方式获取
+
+print(soup.head.title.string)
+
+父节点和祖先节点
+
+通过soup.a.parent就可以获取父节点的信息
+
+通过list(enumerate(soup.a.parents))可以获取祖先节点，这个方法返回的结果是一个列表，会分别将a标签的父节点的信息存放到列表中，以及父节点的父节点也放到列表中，并且最后还会讲整个文档放到列表中，所有列表的最后一个元素以及倒数第二个元素都是存的整个文档的信息
+
+兄弟节点
+
+soup.a.next_siblings 获取后面的兄弟节点
+soup.a.previous_siblings 获取前面的兄弟节点
+soup.a.next_sibling 获取下一个兄弟标签
+soup.a.previous_sinbling 获取上一个兄弟标签
+
+find
+
+find(name,attrs,recursive,text,**kwargs)
+find返回的匹配结果的第一个元素
+
+其他一些类似的用法：
+find_parents()返回所有祖先节点，find_parent()返回直接父节点。
+find_next_siblings()返回后面所有兄弟节点，find_next_sibling()返回后面第一个兄弟节点。
+find_previous_siblings()返回前面所有兄弟节点，find_previous_sibling()返回前面第一个兄弟节点。
+find_all_next()返回节点后所有符合条件的节点, find_next()返回第一个符合条件的节点
+find_all_previous()返回节点后所有符合条件的节点, find_previous()返回第一个符合条件的节点
+
+find_all(name,attrs,recursive,text,**kwargs)
+可以根据标签名，属性，内容查找文档
